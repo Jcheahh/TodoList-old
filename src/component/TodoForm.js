@@ -28,13 +28,14 @@ function TodoForm(props) {
       <form onSubmit={handleSumbit}>
           <input 
             name="task"
+            className="todo-form"
             type="text" 
             value={todo}
             placeholder='Add something'
             onChange={handleChange}
             ref={inputRef}
             />
-          <button type="submit" >Add</button>
+          <button type="submit" className="todo-form-button">Add</button>
       </form>
   )
 }
