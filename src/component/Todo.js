@@ -1,14 +1,16 @@
 import React from 'react';
 
-function Todo({ todos, completeTodo, removeTodo }) {
-  return todos.map(todo => (
-    <div className={todo.isComplete ? 'todo complete' : 'todo'}>
-      <input type="checkbox" onClick={() => completeTodo(todo.id)} />
+const Todo = ({ todo, completeTodo, removeTodo, setEdit }) => {
+  return (
+    <div className={todo.is_done ? "todo complete" : "todo"}>
+      <input type="checkbox" defaultChecked={todo.is_done} onClick={() => completeTodo(todo)} />
       <div>{todo.task}</div>
-      <button className="todo-button" onClick={() => removeTodo(todo.id)}>X</button>
+      <div>
+        <button className="edit" onClick={() => setEdit({ id: todo.id, value: todo.task })}>edit</button>
+        <button className="todo-button" onClick={() => removeTodo(todo.id)}>X</button>
+      </div>
     </div>
-    )
   );
-}
+};
 
 export default Todo;
