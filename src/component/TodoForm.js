@@ -34,7 +34,7 @@ function TodoForm(props) {
             className='todo-form'
           />
           <button onClick={handleSubmit} className='todo-button edit'>
-            Edit
+            Save
           </button>
         </>
       ) : (

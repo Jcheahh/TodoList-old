@@ -86,3 +86,12 @@ body {
   height: 45px;
   font-size: 30px;
 }
+
+.edit {
+  height: 35px;
+  width: 50px;
+  background: #fdfdfd;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
