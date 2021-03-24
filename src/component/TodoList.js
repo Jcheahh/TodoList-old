@@ -85,7 +85,7 @@ const TodoList = () => {
 
     return (
         <>
-            <h1 className="todo-list">TodoList</h1>
+            <h1 className="font-bold text-5xl text-gray-800">Todo List</h1>
             <TodoForm onSubmit={addTodo} />
             {todos.map(todo => {
                 if (edit.id === todo.id) {

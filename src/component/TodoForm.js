@@ -22,7 +22,7 @@ function TodoForm(props) {
     }
 
   return (
-      <form onSubmit={handleSubmit}>
+      <form className="flex" onSubmit={handleSubmit}>
         {props.edit ? (
         <>
           <input
@@ -31,9 +31,10 @@ function TodoForm(props) {
             onChange={handleChange}
             name='text'
             ref={inputRef}
-            className='todo-form'
+            autoComplete="off"
+            className='bg-gray-100 border-gray-100 flex-1 focus-within:border-current focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-600 px-6 py-6 my-6 mr-1.5 h-10 rounded-2xl text-gray-900'
           />
-          <button onClick={handleSubmit} className='todo-button edit'>
+          <button onClick={handleSubmit} className='bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center text-lg'>
             Save
           </button>
         </>
@@ -41,14 +42,15 @@ function TodoForm(props) {
         <>
           <input 
             name="task"
-            className="todo-form"
+            className="bg-gray-100 border-gray-100 flex-1 focus-within:border-current focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-600 px-6 py-6 my-6 mr-1.5 h-10 rounded-2xl text-gray-900"
             type="text" 
             value={todo}
             placeholder='Add something'
             onChange={handleChange}
             ref={inputRef}
+            autoComplete="off"
             />
-          <button onClick={handleSubmit} className="todo-form-button">Add</button>
+          <button onClick={handleSubmit} className="bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center text-lg">Add</button>
           </>
       )}
       </form>
