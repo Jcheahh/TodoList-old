@@ -1,6 +1,6 @@
 # ToDo-List
 
-ToDo list is a simple Web application to save your daily task.
+ToDo list is a simple Web application to save your daily task. I am using a server-client architecture and this is the client side written in React.
 
 ## Features
 
