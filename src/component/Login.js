@@ -19,6 +19,7 @@ export default function Login() {
     };
     return (
         <>
+            <Link to="/">Home</Link>
             <h1>Log in</h1>
             <p>Email</p>
             <input /><br />

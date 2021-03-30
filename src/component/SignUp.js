@@ -18,8 +18,8 @@ export default function SignUp() {
         });
     };
   return (
-      
         <>
+            <Link to="/">Home</Link>
             <h1>Sign Up</h1>
             <p>First Name</p>
             <input />
