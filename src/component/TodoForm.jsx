@@ -59,7 +59,7 @@ function TodoForm(props) {
 }
 
 TodoForm.propTypes = {
-    edit: PropTypes.bool.isRequired,
+    edit: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
 };
 
