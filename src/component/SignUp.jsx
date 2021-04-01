@@ -14,11 +14,6 @@ export default function SignUp() {
     const [user, setUser] = useState();
 
     const { from } = location.state || { from: { pathname: "/" } };
-    const signup = () => {
-        auth.signup(() => {
-            history.replace(from);
-        });
-    };
 
     const validate = (values) => {
         const error = {};
@@ -56,7 +51,7 @@ export default function SignUp() {
     function handleSubmit(e) {
         // e.preventDefault();
 
-        auth.login(() => {
+        auth.signup(() => {
             history.replace(from);
         });
     }
