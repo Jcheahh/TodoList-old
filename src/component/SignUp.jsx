@@ -12,21 +12,22 @@ export default function SignUp() {
     const location = useLocation();
     const auth = useAuth();
     const [user, setUser] = useState();
+    const [errMessage, setErrMessage] = useState();
 
     const { from } = location.state || { from: { pathname: "/" } };
 
     const validate = (values) => {
         const error = {};
-        if (!values.fName) {
-            error.fName = "Please enter your First Name";
-        } else if (values.fName.length < 3) {
-            error.fName = "Your First Name is too short";
+        if (!values.firstName) {
+            error.firstName = "Please enter your First Name";
+        } else if (values.firstName.length < 2) {
+            error.firstName = "Your First Name is too short";
         }
 
-        if (!values.lName) {
-            error.lName = "Please enter your Last Name";
-        } else if (values.lName.length < 3) {
-            error.lName = "Your Last Name is too short";
+        if (!values.lastName) {
+            error.lastName = "Please enter your Last Name";
+        } else if (values.lastName.length < 2) {
+            error.lastName = "Your Last Name is too short";
         }
 
         if (!values.email) {
@@ -41,6 +42,10 @@ export default function SignUp() {
         } else if (values.password.length < 8) {
             error.password = "Your password too short";
         }
+
+        if (values.comfirmPassword !== values.password) {
+            error.comfirmPassword = "Password and Confirm password should match!";
+        }
         return error;
     };
 
@@ -48,13 +53,24 @@ export default function SignUp() {
         setUser(e.target.values);
     };
 
-    function handleSubmit(e) {
-        // e.preventDefault();
+    const handleSubmit = (values) => {
+        // values.preventDefault();
 
-        auth.signup(() => {
-            history.replace(from);
-        });
-    }
+        auth.signup(values.firstName,
+            values.lastName,
+            values.email,
+            values.password,
+            values.comfirmPassword,
+            () => {
+                history.replace(from);
+            }, (error) => {
+                if (error.status === 422) {
+                    setErrMessage("Invalid email address or password");
+                } else {
+                    setErrMessage(error.message);
+                }
+            });
+    };
 
     return (
         <div className="mx-auto mt-24 lg:w-1/2 xl:max-w-screen-sm">
@@ -74,45 +90,50 @@ export default function SignUp() {
                     render={({ handleSubmit, submitting }) => (
                         <div className="mt-12">
                             <form onSubmit={handleSubmit} noValidate>
-                                <div className="text-sm font-bold text-gray-700 tracking-wide">First Name</div>
-                                <Field
-                                    name="fName"
-                                    render={({ input, meta }) => (
-                                        <>
-                                            <input
-                                                className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
-                                                placeholder="Jane"
-                                                id="fName"
-                                                name="fName"
-                                                autoComplete="fName"
-                                                onChange={handleChange}
-                                                {...input}
-                                            />
-                                            {meta.touched && !!meta.error && <p className="text-red-500 text-xs italic text-sm">{meta.error}</p>}
-                                        </>
-                                    )}
-                                />
-                                <div className="mt-8">
-                                    <div className="text-sm font-bold text-gray-700 tracking-wide">Last Name</div>
-                                    <Field
-                                        name="lName"
-                                        render={({ input, meta }) => (
-                                            <>
-                                                <input
-                                                    className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
-                                                    placeholder="Doe"
-                                                    id="lName"
-                                                    name="lName"
-                                                    autoComplete="lName"
-                                                    onChange={handleChange}
-                                                    {...input}
-                                                />
-                                                {meta.touched && !!meta.error && <p className="text-red-500 text-xs italic text-sm">{meta.error}</p>}
-                                            </>
-                                        )}
-                                    />
+                                <div className="text-red-500 text-center mb-4 font-bold">{errMessage}</div>
+                                <div className="-mx-3 md:flex mb-6">
+                                    <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <div className="text-sm font-bold text-gray-700 tracking-wide">First Name</div>
+                                        <Field
+                                            name="firstName"
+                                            render={({ input, meta }) => (
+                                                <>
+                                                    <input
+                                                        className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
+                                                        placeholder="Jane"
+                                                        id="firstName"
+                                                        name="firstName"
+                                                        autoComplete="firstName"
+                                                        onChange={handleChange}
+                                                        {...input}
+                                                    />
+                                                    {meta.touched && !!meta.error && <p className="text-red-500 text-xs italic text-sm">{meta.error}</p>}
+                                                </>
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="md:w-1/2 px-3">
+                                        <div className="text-sm font-bold text-gray-700 tracking-wide">Last Name</div>
+                                        <Field
+                                            name="lastName"
+                                            render={({ input, meta }) => (
+                                                <>
+                                                    <input
+                                                        className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
+                                                        placeholder="Doe"
+                                                        id="lastName"
+                                                        name="lastName"
+                                                        autoComplete="lastName"
+                                                        onChange={handleChange}
+                                                        {...input}
+                                                    />
+                                                    {meta.touched && !!meta.error && <p className="text-red-500 text-xs italic text-sm">{meta.error}</p>}
+                                                </>
+                                            )}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="mt-8">
+                                <div className="mt-3">
                                     <div className="text-sm font-bold text-gray-700 tracking-wide">Email</div>
                                     <Field
                                         name="email"
@@ -145,6 +166,27 @@ export default function SignUp() {
                                                     name="password"
                                                     type="password"
                                                     autoComplete="password"
+                                                    onChange={handleChange}
+                                                    {...input}
+                                                />
+                                                {meta.touched && !!meta.error && <p className="text-red-500 text-xs italic text-sm">{meta.error}</p>}
+                                            </>
+                                        )}
+                                    />
+                                </div>
+                                <div className="mt-8">
+                                    <div className="text-sm font-bold text-gray-700 tracking-wide">Comfirm Password</div>
+                                    <Field
+                                        name="comfirmPassword"
+                                        render={({ input, meta }) => (
+                                            <>
+                                                <input
+                                                    className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
+                                                    placeholder="Re-enter your password"
+                                                    id="comfirmPassword"
+                                                    name="comfirmPassword"
+                                                    type="password"
+                                                    autoComplete="comfirmPassword"
                                                     onChange={handleChange}
                                                     {...input}
                                                 />
