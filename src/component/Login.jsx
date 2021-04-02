@@ -9,6 +9,7 @@ import { useAuth } from "./useAuth";
 
 export default function Login() {
     const [user, setUser] = useState();
+    const [errMessage, setErrMessage] = useState([]);
     const history = useHistory();
     const location = useLocation();
     const auth = useAuth();
@@ -34,14 +35,18 @@ export default function Login() {
         setUser(e.target.values);
     };
 
-    function handleSubmit(e) {
-        // e.preventDefault();
-
-        auth.login(() => {
+    const handleSubmit = (values) => {
+        // values.preventDefault();
+        auth.login(values.email, values.password, () => {
             history.replace(from);
+        }, (error) => {
+            if (error.status === 422) {
+                setErrMessage("Invalid email address or password");
+            } else {
+                setErrMessage(error.message);
+            }
         });
-    }
-
+    };
     return (
         <div className="mx-auto mt-36 lg:w-1/2 xl:max-w-screen-sm">
             <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">
@@ -54,12 +59,14 @@ export default function Login() {
                     Log in
 
                 </h1>
+
                 <Form
                     onSubmit={handleSubmit}
                     validate={validate}
                     render={({ handleSubmit, submitting }) => (
                         <div className="mt-12">
                             <form onSubmit={handleSubmit} noValidate>
+                                <div className="text-red-500 text-center mb-4 font-bold">{errMessage}</div>
                                 <div className="text-sm font-bold text-gray-700 tracking-wide">Email</div>
                                 <Field
                                     name="email"
@@ -99,7 +106,9 @@ export default function Login() {
                                         )}
                                     />
                                 </div>
+
                                 <br />
+
                                 <div className="flex mt-0.5 text-sm font-display font-semibold text-gray-700">
                                     Don&apos;t have an account?&nbsp;
                                     {" "}
@@ -113,7 +122,6 @@ export default function Login() {
                                 shadow-lg mt-4"
                                     type="submit"
                                     disabled={submitting}
-                                // onClick={login}
                                 >
                                     Log in
 
