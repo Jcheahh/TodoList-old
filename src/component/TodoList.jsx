@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Prompt } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
+import http from "../http";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -12,7 +12,7 @@ const TodoList = () => {
     });
 
     useEffect(() => {
-        axios.get("http://localhost:4567/todos")
+        http.get("/todos")
             .then((body) => {
                 setTodos(body.data);
             });
@@ -22,7 +22,7 @@ const TodoList = () => {
         if (!task) {
             return;
         }
-        axios.post("http://localhost:4567/todos", {
+        http.post("/todos", {
             task,
             is_done: 0,
         }).then((response) => {
@@ -34,7 +34,7 @@ const TodoList = () => {
     };
 
     const completeTodo = (todo) => {
-        axios.put(`http://localhost:4567/todos/${todo.id}`, {
+        http.put(`/todos/${todo.id}`, {
             task: todo.task,
             is_done: !todo.is_done,
         }).then((_) => {
@@ -53,7 +53,7 @@ const TodoList = () => {
         if (!task) {
             return;
         }
-        axios.put(`http://localhost:4567/todos/${id}`, {
+        http.put(`/todos/${id}`, {
             task,
             is_done,
         }).then((_) => {
@@ -70,7 +70,7 @@ const TodoList = () => {
     };
 
     const removeTodo = (id) => {
-        axios.delete(`http://localhost:4567/todos/${id}`)
+        http.delete(`/todos/${id}`)
             .then((_) => {
                 const removeArr = [...todos].filter((todo) => todo.id !== id);
 
