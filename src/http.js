@@ -1,8 +1,7 @@
-/* eslint-disable no-underscore-dangle */
 import axios from "axios";
 
 const http = axios.create({
-    baseURL: "http://localhost:4567",
+    baseURL: process.env.REACT_APP_BACKEND_URL || "http://localhost:4567",
 });
 
 http.interceptors.request.use(
