@@ -67,7 +67,7 @@ export default function SignUp() {
                 if (error.status === 422) {
                     setErrMessage("Invalid email address or password");
                 } else {
-                    setErrMessage(error.message);
+                    setErrMessage(error.data.message);
                 }
             });
     };
