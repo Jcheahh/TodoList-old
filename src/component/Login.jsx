@@ -40,10 +40,12 @@ export default function Login() {
         auth.login(values.email, values.password, () => {
             history.replace(from);
         }, (error) => {
-            if (error.status === 422) {
+            if (error === undefined) {
+                setErrMessage("Something went wrong");
+            } else if (error.status === 422) {
                 setErrMessage("Invalid email address or password");
             } else {
-                setErrMessage(error.message);
+                setErrMessage(error.data.message);
             }
         });
     };
