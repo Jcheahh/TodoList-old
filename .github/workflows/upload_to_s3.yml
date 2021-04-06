@@ -19,6 +19,8 @@ jobs:
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - run: npm run build
+        env:
+          BACKEND_URL: http://165.232.172.90
       - name: Publish to s3 bucket
         run: |
           # Install aws cli https://github.com/aws/aws-cli/issues/5262
