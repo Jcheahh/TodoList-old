@@ -35,11 +35,13 @@ export default function Login() {
         setUser(e.target.values);
     };
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values, _, callback) => {
         // values.preventDefault();
         auth.login(values.email, values.password, () => {
             history.replace(from);
+            callback();
         }, (error) => {
+            callback(error || {});
             if (error === undefined) {
                 setErrMessage("Something went wrong");
             } else if (error.status === 422) {
@@ -76,7 +78,7 @@ export default function Login() {
                                         <>
                                             <input
                                                 className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
-                                                placeholder="jack@gmail.com"
+                                                placeholder="example@gmail.com"
                                                 id="email"
                                                 name="email"
                                                 autoComplete="email"
@@ -121,11 +123,11 @@ export default function Login() {
                                 <button
                                     className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                                shadow-lg mt-4"
+                                shadow-lg mt-4 disabled:opacity-50 disabled:hover:bg-indigo-500"
                                     type="submit"
                                     disabled={submitting}
                                 >
-                                    Log in
+                                    {submitting ? "Loading..." : "Log In"}
 
                                 </button>
                             </form>

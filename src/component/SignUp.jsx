@@ -53,7 +53,7 @@ export default function SignUp() {
         setUser(e.target.values);
     };
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values, _, callback) => {
         // values.preventDefault();
 
         auth.signup(values.firstName,
@@ -63,7 +63,9 @@ export default function SignUp() {
             values.comfirmPassword,
             () => {
                 history.replace(from);
+                callback();
             }, (error) => {
+                callback({});
                 if (error.status === 422) {
                     setErrMessage("Invalid email address or password");
                 } else {
@@ -141,7 +143,7 @@ export default function SignUp() {
                                             <>
                                                 <input
                                                     className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
-                                                    placeholder="jack@gmail.com"
+                                                    placeholder="example@gmail.com"
                                                     id="email"
                                                     name="email"
                                                     autoComplete="email"
@@ -206,11 +208,11 @@ export default function SignUp() {
                                 <button
                                     className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                                shadow-lg mt-4"
+                                shadow-lg mt-4 disabled:opacity-50"
                                     type="submit"
                                     disabled={submitting}
                                 >
-                                    Sign Up
+                                    {submitting ? "Loading..." : "Sign Up"}
 
                                 </button>
                             </form>
