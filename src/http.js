@@ -16,4 +16,16 @@ http.interceptors.request.use(
     (error) => Promise.reject(error),
 );
 
+http.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const { status } = error.response;
+        if (status === 401) {
+            localStorage.removeItem("token");
+            window.history.go("/login");
+        }
+        return Promise.reject(error);
+    },
+);
+
 export default http;
