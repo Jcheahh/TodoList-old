@@ -10,7 +10,7 @@ import TodoList from "./component/TodoList";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
 import LandingPage from "./component/LandingPage";
-import { authContext, useAuth, useProvideAuth } from "./component/useAuth";
+import { authContext, useAuth, useProvideAuth } from "./hook/useAuth";
 
 function App() {
     return (
