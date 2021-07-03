@@ -3,6 +3,7 @@ import { Prompt } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import http from "../http";
+import { Text } from "./ui/Text";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -80,7 +81,7 @@ const TodoList = () => {
 
     return (
         <div className="App shadow font-sans px-9 py-16 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
-            <h1 className="font-bold text-5xl text-gray-800">Todo List</h1>
+            <Text.H2 className={["font-bold"]}>Todo List</Text.H2>
             <TodoForm onSubmit={addTodo} />
             {todos.map((todo) => {
                 if (edit.id === todo.id) {
