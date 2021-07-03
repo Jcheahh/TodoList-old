@@ -51,7 +51,9 @@ function TodoForm(props) {
                         ref={inputRef}
                         autoComplete="off"
                     />
-                    <button type="button" onClick={handleSubmit} className="bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center text-lg">Add</button>
+                    <button type="button" onClick={handleSubmit} className="bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center text-lg">
+                        Add
+                    </button>
                 </>
             )}
         </form>
