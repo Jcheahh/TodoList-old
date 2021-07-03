@@ -48,9 +48,6 @@ function App() {
                                 <div className="my-2">
                                     <Input variant="outlined" />
                                 </div>
-                                {/* <div className="my-2">
-                                    <Input.Password />
-                                </div> */}
                                 <div className="my-2">
                                     <Button>Click here</Button>
                                     <Button.Default>Click here</Button.Default>
