@@ -2,19 +2,36 @@ import React from "react";
 import {
     Link,
 } from "react-router-dom";
+import { Button } from "./ui/Button";
+import NavBar from "./ui/NavBar";
+import { Text } from "./ui/Text";
+import { Link as Link1 } from "./ui/Link";
 
 export default function LandingPage() {
     return (
-        <div className="App shadow font-sans px-9 py-16 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
-            <h1 className="font-bold text-7xl text-gray-800 text-center mt-24">Welcome</h1>
-            <div className="text-center flex space-x-4 mt-16">
-                <Link to="/login" className="flex-1 text-2xl bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center">
-                    Log In
+        <>
+            <NavBar>
+                <Link1.Regular className={["mr-4 font-semibold"]} to="/login">Log In</Link1.Regular>
+                <Link to="/sign-up">
+                    <Button>Sign Up</Button>
                 </Link>
-                <Link to="/sign-up" className="flex-1 text-2xl bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center">
-                    Sign Up
-                </Link>
+            </NavBar>
+            <div className="flex justify-center">
+
+                <div className="text-left max-w-2xl py-14">
+                    <Text.H1 className={["font-bold"]}>
+                        <span className="text-6xl text-gray-700 block">Todo List,</span>
+                        <span>Reimagined</span>
+                    </Text.H1>
+                    <p className="py-3 text-2xl">
+                        Todolist lets you quickly add and organize tasks,
+                        including recurring tasks and mark as done when you completed
+                    </p>
+                    <Button isLarge>
+                        Demo
+                    </Button>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
