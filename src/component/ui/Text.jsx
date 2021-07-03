@@ -21,6 +21,7 @@ const hBaseClasses = [
     ...baseClasses,
     toText(gray1),
     "font-medium",
+    "title-font",
 ];
 
 const h1Classes = [
@@ -80,10 +81,21 @@ Text.H5 = function ({ children, className }) {
 
 // Small
 
-const smallClasses = [
+const translucentClasses = [
     ...baseClasses,
     "text-sm",
     toText(gray3),
+];
+
+Text.Translucent = function ({ children, className }) {
+    return (
+        <p className={[...translucentClasses, ...className].join(" ")}>{children}</p>
+    );
+};
+
+const smallClasses = [
+    ...baseClasses,
+    "text-sm",
 ];
 
 Text.Small = function ({ children, className }) {
@@ -115,3 +127,5 @@ Text.H5.propTypes = textPropTypes;
 Text.H5.defaultProps = textDefaultProps;
 Text.Small.propTypes = textPropTypes;
 Text.Small.defaultProps = textDefaultProps;
+Text.Translucent.propTypes = textPropTypes;
+Text.Translucent.defaultProps = textDefaultProps;
