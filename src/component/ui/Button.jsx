@@ -5,35 +5,47 @@ import {
 } from "./color";
 import "./Button.css";
 
+function toLarge(classes) {
+    return [
+        ...classes,
+        "py-4",
+        "px-10",
+        "text-xl",
+    ];
+}
+
+function toSmall(classes) {
+    return [
+        ...classes,
+        "py-1.5",
+        "px-4",
+    ];
+}
+
 const buttonBaseClasses = [
-    "p-4",
-    "w-full",
+    "ui-button", // For own custom css
     "rounded-xl",
-    "text-lg",
     "tracking-wide",
     "font-semibold",
     "font-display",
     "focus:outline-none",
     "focus:shadow-outline",
-    // "hover:bg-indigo-600",
-    // "shadow-lg",
-    "mt-4",
     "disabled:opacity-50",
-    // "disabled:hover:bg-indigo-500",
+    "transform",
+    "hover:shadow",
 ];
 
 const buttonClasses = [
     ...buttonBaseClasses,
     toText(gray5),
-
 ];
 
 export function Button({
-    children, type, className, ...props
+    children, type, className, isLarge, ...props
 }) {
     return (
         <button
-            className={[...buttonClasses, ...className, "ui-button"].join(" ")}
+            className={["ui-main-button", ...(isLarge ? toLarge(buttonClasses) : toSmall(buttonClasses)), ...className].join(" ")}
             /* eslint-disable-next-line react/button-has-type */
             type={type}
             {...props}
@@ -52,11 +64,11 @@ const defaultButtonClasses = [
 ];
 
 Button.Default = function ({
-    children, className, type, ...props
+    children, className, type, isLarge, ...props
 }) {
     return (
         <button
-            className={[...defaultButtonClasses, ...className].join(" ")}
+            className={[...((isLarge ? toLarge(defaultButtonClasses) : toSmall(defaultButtonClasses))), ...className].join(" ")}
             /* eslint-disable-next-line react/button-has-type */
             type={type}
             {...props}
@@ -72,12 +84,14 @@ const buttonPropTypes = {
     /* eslint-disable-next-line react/forbid-prop-types */
     style: PropTypes.object,
     type: PropTypes.oneOf(["button", "submit", "reset"]),
+    isLarge: PropTypes.bool,
 };
 
 const buttonDefaultProps = {
     className: [],
     style: {},
     type: "button",
+    isLarge: false,
 };
 
 Button.propTypes = buttonPropTypes;
