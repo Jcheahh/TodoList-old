@@ -28,7 +28,7 @@ function App() {
                         <HomeRoute exact path="/">
                             <TodoList />
                         </HomeRoute>
-                        <Route path="/design">
+                        {/* <Route path="/design">
                             <div className="py-20 px-16">
                                 <Text.H1>Hello world</Text.H1>
                                 <Text.H2>Hello world</Text.H2>
@@ -59,7 +59,7 @@ function App() {
                                     </Button.Default>
                                 </div>
                             </div>
-                        </Route>
+                        </Route> */}
                     </Switch>
                 </Router>
             </ProvideAuth>
@@ -68,7 +68,7 @@ function App() {
 }
 
 function ProvideAuth({ children }) {
-    const auth = useProvideAuth();
+    const auth = useProvideAuths();
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 

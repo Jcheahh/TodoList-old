@@ -18,9 +18,9 @@ export default function Login() {
     const location = useLocation();
     const auth = useAuth();
 
-    const { from } = location.state || { from: { pathname: "/" } };
+    const { from }: { from: string } = location.state || { from: { pathname: "/" } };
 
-    const validate = (values) => {
+    const validate = (values: JSX.Element) => {
         const error = {};
         if (!values.email) {
             error.email = "Fill in your email";
@@ -35,7 +35,7 @@ export default function Login() {
         return error;
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: JSX.Element) => {
         setUser(e.target.values);
     };
 
@@ -80,8 +80,7 @@ export default function Login() {
                                         render={({ input, meta }) => (
                                             <>
                                                 <Input
-                                                    label="Email"
-                                                    className={`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`}
+                                                    className={[`w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${meta.touched && !!meta.error ? "border-red-500" : ""}`]}
                                                     placeholder="example@gmail.com"
                                                     id="email"
                                                     name="email"
@@ -120,7 +119,7 @@ export default function Login() {
                                     <Text.Small className={["flex my-3.5 font-display font-semibold"]}>
                                         Don&apos;t have an account?&nbsp;
                                         {" "}
-                                        <Link.Regular to="/sign-up">Sign up</Link.Regular>
+                                        <Link to="/sign-up">Sign up</Link>
                                     </Text.Small>
                                     <Button type="submit" disabled={submitting}>{submitting ? "Loading..." : "Log In"}</Button>
                                 </form>

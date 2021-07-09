@@ -1,5 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+interface TodoProps {
+    todo: shape({
+        id: number,
+        task: string,
+        is_done: bool,
+    }),
+    completeTodo: func,
+    removeTodo: func,
+    setEdit: func,
+}
 
 function Todo({
     todo, completeTodo, removeTodo, setEdit,
@@ -26,15 +36,15 @@ function Todo({
     );
 }
 
-Todo.propTypes = {
-    todo: PropTypes.shape({
-        id: PropTypes.number,
-        task: PropTypes.string.isRequired,
-        is_done: PropTypes.bool.isRequired,
-    }).isRequired,
-    completeTodo: PropTypes.func.isRequired,
-    removeTodo: PropTypes.func.isRequired,
-    setEdit: PropTypes.func.isRequired,
+Todo.= {
+    todo: shape({
+        id: number,
+        task: string,
+        is_done: bool,
+    }),
+    completeTodo: func,
+    removeTodo: func,
+    setEdit: func,
 };
 
 export default Todo;

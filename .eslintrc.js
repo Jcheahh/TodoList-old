@@ -6,6 +6,8 @@ module.exports = {
     extends: [
         "plugin:react/recommended",
         "airbnb",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
     ],
     parserOptions: {
         ecmaFeatures: {
@@ -14,9 +16,8 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: "module",
     },
-    plugins: [
-        "react",
-    ],
+    plugins: ["react", "@typescript-eslint"],
+    parser: "@typescript-eslint/parser",
     rules: {
         quotes: ["error", "double"],
         indent: ["error", 4],
@@ -28,8 +29,27 @@ module.exports = {
         "react/jsx-props-no-spreading": "off",
         "react/destructuring-assignment": "off",
         "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": [1, { extensions: [".tsx", ".ts"] }],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                js: "never",
+                jsx: "never",
+                ts: "never",
+                tsx: "never",
+            },
+        ],
 
         // TODO: remove this
         "no-unused-vars": "off",
+        "no-use-before-define": "off",
+    },
+    settings: {
+        "import/resolver": {
+            node: {
+                extensions: [".js", ".jsx", ".ts", ".tsx"],
+            },
+        },
     },
 };

@@ -7,13 +7,13 @@ import NavBar from "./ui/NavBar";
 import { Text } from "./ui/Text";
 import { Link as Link1 } from "./ui/Link";
 
-export default function LandingPage() {
+export default function LandingPage(): JSX.Element {
     return (
         <>
             <NavBar>
-                <Link1.Regular className={["mr-4 font-semibold"]} to="/login">Log In</Link1.Regular>
+                <Link1 className={["mr-4 font-semibold"]} to="/login">Log In</Link1>
                 <Link to="/sign-up">
-                    <Button>Sign Up</Button>
+                    <Button type="button">Sign Up</Button>
                 </Link>
             </NavBar>
             <div className="flex justify-center">
@@ -27,7 +27,7 @@ export default function LandingPage() {
                         Todolist lets you quickly add and organize tasks,
                         including recurring tasks and mark as done when you completed
                     </p>
-                    <Button isLarge>
+                    <Button isLarge type="button">
                         Demo
                     </Button>
                 </div>

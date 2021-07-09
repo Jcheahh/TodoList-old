@@ -7,14 +7,18 @@ export const gray5 = "gray-100";
 export const red1 = "red-400";
 export const red2 = "red-600";
 
-export function toText(color) {
+const colors = [gray1, gray2, gray3, gray4, gray5, red1, red2] as const;
+
+type Color = typeof colors[number];
+
+export function toText(color: Color): string {
     return `text-${color}`;
 }
 
-export function toBg(color) {
+export function toBg(color: Color): string {
     return `bg-${color}`;
 }
 
-export function toHover(css) {
+export function toHover(css: Element): string {
     return `hover:${css}`;
 }
