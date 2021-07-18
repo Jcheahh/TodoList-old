@@ -43,7 +43,8 @@ module.exports = {
     ],
 
     // TODO: remove this
-    "no-unused-vars": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "no-use-before-define": "off",
     "react/require-default-props": "off",
   },

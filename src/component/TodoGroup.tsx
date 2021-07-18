@@ -40,8 +40,6 @@ function TodoGroup(): ReactElement {
   };
 
   const editTodoGroup = (todoGroup: TodoGroupField) => {
-    console.log(todoGroup);
-
     const { id, title } = todoGroup;
 
     if (!title) {

@@ -28,31 +28,31 @@ const hBaseClasses = [
 
 const h1Classes = [...hBaseClasses, "text-7xl"];
 
-Text.H1 = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.H1 = ({ children, className = [] }: TextProps): JSX.Element => {
   return <h1 className={[...h1Classes, ...className].join(" ")}>{children}</h1>;
 };
 
 const h2Classes = [...hBaseClasses, "text-5xl"];
 
-Text.H2 = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.H2 = ({ children, className = [] }: TextProps): JSX.Element => {
   return <h2 className={[...h2Classes, ...className].join(" ")}>{children}</h2>;
 };
 
 const h3Classes = [...hBaseClasses, "text-4xl"];
 
-Text.H3 = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.H3 = ({ children, className = [] }: TextProps): JSX.Element => {
   return <h3 className={[...h3Classes, ...className].join(" ")}>{children}</h3>;
 };
 
 const h4Classes = [...hBaseClasses, "text-3xl"];
 
-Text.H4 = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.H4 = ({ children, className = [] }: TextProps): JSX.Element => {
   return <h4 className={[...h4Classes, ...className].join(" ")}>{children}</h4>;
 };
 
 const h5Classes = [...hBaseClasses, "text-2xl"];
 
-Text.H5 = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.H5 = ({ children, className = [] }: TextProps): JSX.Element => {
   return <h5 className={[...h5Classes, ...className].join(" ")}>{children}</h5>;
 };
 
@@ -60,10 +60,7 @@ Text.H5 = function ({ children, className = [] }: TextProps): JSX.Element {
 
 const translucentClasses = [...baseClasses, "text-sm", toText(gray3)];
 
-Text.Translucent = function ({
-  children,
-  className = [],
-}: TextProps): JSX.Element {
+Text.Translucent = ({ children, className = [] }: TextProps): JSX.Element => {
   return (
     <p className={[...translucentClasses, ...className].join(" ")}>
       {children}
@@ -73,7 +70,7 @@ Text.Translucent = function ({
 
 const smallClasses = [...baseClasses, "text-sm"];
 
-Text.Small = function ({ children, className = [] }: TextProps): JSX.Element {
+Text.Small = ({ children, className = [] }: TextProps): JSX.Element => {
   return (
     <p className={[...smallClasses, ...className].join(" ")}>{children}</p>
   );

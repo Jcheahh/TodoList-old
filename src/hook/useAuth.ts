@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useContext, createContext, useState } from "react";
+import React, { useContext, createContext, useState } from "react";
 import http from "../http";
 
 interface Auth {
@@ -17,11 +17,11 @@ interface Auth {
 
 export const authContext = createContext<Auth | null>(null);
 
-export function useAuth() {
+export function useAuth(): Auth | null {
   return useContext(authContext);
 }
 
-export function useProvideAuth() {
+export function useProvideAuth(): Auth {
   const [user, setUser] = useState(localStorage.getItem("token"));
 
   const login = (email: string, password: string): Promise<void> =>
