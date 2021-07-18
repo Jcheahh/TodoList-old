@@ -12,13 +12,13 @@ const colors = [gray1, gray2, gray3, gray4, gray5, red1, red2] as const;
 type Color = typeof colors[number];
 
 export function toText(color: Color): string {
-    return `text-${color}`;
+  return `text-${color}`;
 }
 
 export function toBg(color: Color): string {
-    return `bg-${color}`;
+  return `bg-${color}`;
 }
 
 export function toHover(css: Element): string {
-    return `hover:${css}`;
+  return `hover:${css}`;
 }
