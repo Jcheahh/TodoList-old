@@ -1,0 +1,25 @@
+.ui-button {
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}
+
+.ui-button.ui-main-button {
+    background-color: #fd571b;
+}
+
+.ui-button:hover {
+    transform: translateY(-1px);
+}
+
+.ui-button.ui-main-button:hover {
+    background-color: #ff7f50;
+}
+
+.ui-button:active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+
+.ui-button.ui-main-button:active {
+    background-color: #c85000;
+}
