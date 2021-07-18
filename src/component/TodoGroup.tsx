@@ -1,11 +1,9 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Prompt } from "react-router-dom";
 import http from "../http";
-import TodoForm from "./TodoForm";
 import AddForm from "./todoGroup/AddForm";
 import EditForm from "./todoGroup/EditForm";
 import { Button } from "./ui/Button";
-import Input from "./ui/Input";
 import { Link } from "./ui/Link";
 import { Text } from "./ui/Text";
 
@@ -16,7 +14,6 @@ interface TodoGroupField {
 
 function TodoGroup(): ReactElement {
   const [todoGroups, setTodoGroups] = useState<TodoGroupField[]>([]);
-  const [todoGroup, setTodoGroup] = useState<string>("");
   const [editingId, setEditingId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -76,19 +73,11 @@ function TodoGroup(): ReactElement {
     });
   };
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setTodoGroup(e.target.value);
-  }
-
   return (
     <div className="App shadow font-sans px-9 py-16 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
       <Text.H2 className={["font-bold"]}>Todo Group</Text.H2>
       <div className="my-2 px-5 border inline-flex items-center bg-white leading-none rounded-full p-2 shadow text-sm">
         <AddForm addTodoGroup={addTodoGroup} />
-        {/* <Input value={todoGroup} onChange={handleChange} />
-        <Button type="button" onClick={() => addTodoGroup(todoGroup)}>
-          Add
-        </Button> */}
       </div>
       {todoGroups.map((todoGroup) => {
         if (editingId === todoGroup.id) {
