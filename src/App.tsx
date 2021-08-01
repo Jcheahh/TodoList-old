@@ -6,6 +6,7 @@ import {
   Route,
   RouteProps,
   RouteComponentProps,
+  Link as RLink,
 } from "react-router-dom";
 import TodoList from "./component/TodoList";
 import Login from "./component/Login";
@@ -18,6 +19,7 @@ import { Link } from "./component/ui/Link";
 import NavBar from "./component/ui/NavBar";
 import Input from "./component/ui/Input";
 import TodoGroup from "./component/TodoGroup";
+import Dropdown from "./component/ui/Dropdown";
 
 function App(): JSX.Element {
   return (
@@ -41,6 +43,77 @@ function App(): JSX.Element {
               <TodoGroup />
             </HomeRoute>
             <Route path="/design">
+              <NavBar>
+                <Dropdown>
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="menu-button"
+                  >
+                    <div className="py-1" role="none">
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-0"
+                      >
+                        Edit
+                      </p>
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-1"
+                      >
+                        Duplicate
+                      </p>
+                    </div>
+                    <div className="py-1" role="none">
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-2"
+                      >
+                        Archive
+                      </p>
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-3"
+                      >
+                        Move
+                      </p>
+                    </div>
+                    <div className="py-1" role="none">
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-4"
+                      >
+                        Share
+                      </p>
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-5"
+                      >
+                        Add to favorites
+                      </p>
+                    </div>
+                    <div className="py-1" role="none">
+                      <p
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                        id="menu-item-6"
+                      >
+                        Delete
+                      </p>
+                      <button
+                        type="button"
+                        className="text-gray-700 block px-4 py-2 text-sm"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* <ul>Hi</ul>
+                  <ul>Bye</ul>
+                  <ul>Logout</ul> */}
+                </Dropdown>
+              </NavBar>
               <div className="py-20 px-16">
                 <Text.H1>Hello world</Text.H1>
                 <Text.H2>Hello world</Text.H2>
@@ -51,6 +124,7 @@ function App(): JSX.Element {
                 <Text.Small>Hello world</Text.Small>
                 <Text.Translucent>Hello world</Text.Translucent>
                 <Link to="/design">Hello world</Link>
+                <RLink to="/design">Hello world</RLink>
                 <div className="my-2">
                   <Input />
                 </div>
@@ -87,18 +161,27 @@ function CheckLoggedIn(
           auth.user ? (
             <>
               <NavBar>
-                <Button
-                  className={[
-                    "absolute right-20 top-10 font-bold text-gray-700 hover:text-black",
-                  ]}
-                  onClick={() =>
-                    auth.signout().then(() => {
-                      routerProps.history.replace("/login");
-                    })
-                  }
-                >
-                  Logout
-                </Button>
+                <Dropdown>
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-sm bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                  >
+                    <div className="py-1" role="none">
+                      <button
+                        type="button"
+                        className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200 w-full text-left"
+                        onClick={() =>
+                          auth.signout().then(() => {
+                            routerProps.history.replace("/login");
+                          })
+                        }
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </Dropdown>
               </NavBar>
               {children}
             </>
