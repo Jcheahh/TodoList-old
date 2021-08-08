@@ -16,14 +16,13 @@ const InputClasses = [
   "font-thin",
   "transition",
   "duration-200",
-  "focus:shadow-md",
+  "focus:shadow-sm",
   "focus:outline-none",
-  "ring-offset-2",
+  "ring-offset-0",
   "border",
   "border-gray-400",
   "rounded-lg",
   "focus:ring-2",
-  "focus:ring-purple-300",
 ];
 
 function Input({ className = [], ...props }: InputProps): JSX.Element {
