@@ -97,7 +97,7 @@ export default function Login(): JSX.Element {
                         <Input
                           {...input}
                           className={[
-                            `w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${
+                            `w-full text-lg py-2 border-b border-gray-300 focus:outline-none ${
                               meta.touched && !!meta.error
                                 ? "border-red-500"
                                 : ""
@@ -129,7 +129,7 @@ export default function Login(): JSX.Element {
                           <Input
                             {...input}
                             className={[
-                              `w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 ${
+                              `w-full text-lg py-2 border-b border-gray-300 focus:outline-none ${
                                 meta.touched && !!meta.error
                                   ? "border-red-500"
                                   : ""
