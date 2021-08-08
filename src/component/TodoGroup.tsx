@@ -73,10 +73,8 @@ function TodoGroup(): ReactElement {
 
   return (
     <div className="App shadow font-sans px-9 py-16 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
-      <Text.H2 className={["font-bold"]}>Todo Group</Text.H2>
-      <div className="my-2 px-5 border inline-flex items-center bg-white leading-none rounded-full p-2 shadow text-sm">
-        <AddForm addTodoGroup={addTodoGroup} />
-      </div>
+      <Text.H2 className={["font-bold"]}>Lists</Text.H2>
+      <AddForm addTodoGroup={addTodoGroup} />
       {todoGroups.map((todoGroup) => {
         if (editingId === todoGroup.id) {
           return (
@@ -92,13 +90,31 @@ function TodoGroup(): ReactElement {
           );
         }
         return (
-          <div className="my-2 px-5 border inline-flex items-center bg-white leading-none rounded-full p-2 shadow text-sm">
-            <Link to={`/todo_group/${todoGroup.id}`}>{todoGroup.title}</Link>
+          <div className="my-2 px-5 border inline-flex items-center bg-white leading-none p-2 text-sm">
+            <Link
+              to={`/todo_group/${todoGroup.id}`}
+              className={["text-md flex-1 ml-4"]}
+            >
+              {todoGroup.title}
+            </Link>
             <Button type="button" onClick={() => setEditingId(todoGroup.id)}>
               Edit
             </Button>
             <Button type="button" onClick={() => removeTodoGroup(todoGroup.id)}>
-              Remove
+              <svg
+                width="14"
+                height="14"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+              >
+                <path d="M12 12h2v12h-2z" fill="currentColor" />
+                <path d="M18 12h2v12h-2z" fill="currentColor" />
+                <path
+                  d="M4 6v2h2v20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8h2V6zm4 22V8h16v20z"
+                  fill="currentColor"
+                />
+                <path d="M12 2h8v2h-8z" fill="currentColor" />
+              </svg>
             </Button>
           </div>
         );
