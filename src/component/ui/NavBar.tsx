@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "./Link";
 import { toText, gray2 } from "./color";
 
 function NavBar({
@@ -10,9 +10,9 @@ function NavBar({
   className?: string[];
 }): JSX.Element {
   return (
-    <nav className="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-3 px-6 bg-white sm:items-baseline w-full container">
+    <nav className="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-3 px-6 bg-transparent sm:items-baseline w-full container">
       <div className="mb-2 sm:mb-0">
-        <Link to="/" className="text-xl font-bold">
+        <Link to="/" className={["text-xl font-bold"]}>
           Todo List
         </Link>{" "}
       </div>
