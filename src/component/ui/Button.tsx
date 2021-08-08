@@ -32,7 +32,7 @@ type ButtonProps = Omit<
   >,
   "className"
 > & {
-  children: string;
+  children: string | JSX.Element;
   className?: string[];
   isLarge?: boolean;
 };
