@@ -3,7 +3,8 @@ import React, { useContext, createContext, useState } from "react";
 import http from "../http";
 
 interface Auth {
-  user: string | null;
+  user: User | null;
+  token: string | null;
   login: (email: string, password: string) => Promise<void>;
   signup: (
     firstName: string,
@@ -13,6 +14,7 @@ interface Auth {
     password_confirmation: string,
   ) => Promise<void>;
   signout: () => Promise<void>;
+  validateToken: () => Promise<boolean>;
 }
 
 export const authContext = createContext<Auth | null>(null);
@@ -21,8 +23,15 @@ export function useAuth(): Auth | null {
   return useContext(authContext);
 }
 
+interface User {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
 export function useProvideAuth(): Auth {
-  const [user, setUser] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState<User | null>(null);
 
   const login = (email: string, password: string): Promise<void> =>
     http
@@ -33,8 +42,9 @@ export function useProvideAuth(): Auth {
         },
       })
       .then((response) => {
-        setUser(response.data.token);
+        setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
+        setUser(response.data.user);
       })
       .catch((error: AxiosError) => {
         throw error.response;
@@ -57,8 +67,9 @@ export function useProvideAuth(): Auth {
         },
       })
       .then((response) => {
-        setUser(response.data.token);
+        setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
+        setUser(response.data.user);
       })
       .catch((error: AxiosError) => {
         throw error.response;
@@ -66,15 +77,29 @@ export function useProvideAuth(): Auth {
 
   const signout = (): Promise<void> =>
     new Promise((resolve, _reject) => {
+      setToken(null);
       setUser(null);
       localStorage.removeItem("token");
       resolve();
     });
 
+  const validateToken = (): Promise<boolean> =>
+    http
+      .get("/api/validate_token")
+      .then((response) => {
+        setUser(response.data);
+        return true;
+      })
+      .catch((_e) => {
+        return false;
+      });
+
   return {
+    token,
     user,
     login,
     signup,
     signout,
+    validateToken,
   };
 }
