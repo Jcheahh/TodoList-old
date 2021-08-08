@@ -8,13 +8,15 @@ import AddForm from "./todo/AddForm";
 import EditForm from "./todo/EditForm";
 
 const TodoList = (): JSX.Element => {
+  const [todosTitle, setTodosTitle] = useState<string>();
   const [todos, setTodos] = useState<TodoField[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const { todo_group_id } = useParams<{ todo_group_id: string }>();
 
   useEffect(() => {
-    http.get(`/todo_group/${todo_group_id}/todos`).then((body) => {
-      setTodos(body.data);
+    http.get(`/todo_group/${todo_group_id}`).then((body) => {
+      setTodos(body.data.todos);
+      setTodosTitle(body.data.title);
     });
   }, []);
 
@@ -82,12 +84,12 @@ const TodoList = (): JSX.Element => {
   };
 
   return (
-    <div className="App shadow font-sans px-9 py-16 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
-      <Link to="/">Back</Link>
-      <Text.H2 className={["font-bold"]}>Todo List</Text.H2>
-      <div className="my-2 px-5 border inline-flex items-center bg-white leading-none rounded-full p-2 shadow text-sm">
-        <AddForm addTodo={addTodo} />
+    <div className="App shadow font-sans px-9 py-12 flex justify-start flex-col w-4/6 max-w-screen-sm bg-white mx-auto my-28 rounded-2xl">
+      <div className="flex justify-between items-center">
+        <Text.H2 className={["font-bold"]}>{todosTitle}</Text.H2>
+        <Link to="/">Back</Link>
       </div>
+      <AddForm addTodo={addTodo} />
       {todos.map((todo) => {
         if (editingId === todo.id) {
           return (
