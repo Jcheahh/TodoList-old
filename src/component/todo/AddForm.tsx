@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
+import { Button } from "../ui/Button";
 
 function AddForm(props: { addTodo: (todo: string) => void }): JSX.Element {
   const [todo, setTodo] = useState("");
@@ -21,24 +22,26 @@ function AddForm(props: { addTodo: (todo: string) => void }): JSX.Element {
   });
 
   return (
-    <>
+    <div className="flex">
       <input
         name="task"
-        className="bg-gray-100 border-gray-100 flex-1 focus-within:border-current focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-600 px-6 py-6 my-6 mr-1.5 h-10 rounded-2xl text-gray-900"
+        className="bg-gray-100 border-gray-100 placeholder-gray-600 p-6 my-6 mr-1.5 h-10 text-gray-900 w-full transition duration-200 focus:shadow-sm focus:outline-none ring-offset-0 border border-gray-400 rounded-xl focus:ring-2 focus:ring-red-300 focus:border-gray-100"
         value={todo}
-        placeholder="Add something"
+        placeholder="Add task"
         onChange={handleChange}
         ref={inputRef}
         autoComplete="off"
       />
-      <button
+      <Button
         type="button"
         onClick={handleSubmit}
-        className="bg-purple-100 focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-bold hover:bg-purple-600 hover:text-purple-100 text-purple-700 transform self-center text-lg"
+        className={[
+          "focus:outline-none text-sm py-2.5 px-8 rounded-2xl font-boldtransform self-center text-lg",
+        ]}
       >
         Add
-      </button>
-    </>
+      </Button>
+    </div>
   );
 }
 
